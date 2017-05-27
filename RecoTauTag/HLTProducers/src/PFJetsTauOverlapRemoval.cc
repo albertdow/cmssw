@@ -37,7 +37,7 @@ void PFJetsTauOverlapRemoval::produce(edm::StreamID iSId, edm::Event& iEvent, co
   trigger::VRpftau taus; 
   tauJets->getObjects(trigger::TriggerTau,taus);
   
-  if(edm::InputTag("PFJetSrc") == edm::InputTag("L1PFJetsMatching","TwoJets")){
+  if(edm::InputTag("PFJetSrc") == edm::InputTag("hltAK4PFJetsCorrectedIDPassed") || edm::InputTag("PFJetSrc") == edm::InputTag("L1PFJetsMatching","TwoJets")){
     for(unsigned int iTau = 0; iTau < taus.size(); iTau++){  
       for(unsigned int iJet = 0; iJet < PFJets->size(); iJet++){
         const PFJet &  myPFJet = (*PFJets)[iJet];
@@ -48,7 +48,7 @@ void PFJetsTauOverlapRemoval::produce(edm::StreamID iSId, edm::Event& iEvent, co
       }
     }
   }
-  if(edm::InputTag("PFJetSrc") == edm::InputTag("L1PFJetsMatching","ThreeJets")){
+  else if(edm::InputTag("PFJetSrc") == edm::InputTag("L1PFJetsMatching","ThreeJets")){
     for(unsigned int iTau = 0; iTau < taus.size(); iTau++){  
       for(unsigned int iJet = 0; iJet < PFJets->size()-1; iJet++){
         const PFJet &  myPFJet = (*PFJets)[iJet];
